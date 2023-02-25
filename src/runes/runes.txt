@@ -1,0 +1,1 @@
+6* 4 VIOLENT ATK - atk 10 atk 10 def 10 SPD 4 end

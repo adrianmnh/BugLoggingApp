@@ -1,0 +1,6 @@
+5 violent 3 no def atk 8 acc 7 spd 6 crte 5
+5 rage 2 yes ATK DEF 8 acc 10 spd 12 hp 14 def 10
+6 swift 5 no hp spd 20 res 13 HP 10 cdmg 5
+5 rage 2 yes ATK DEF 8 acc 11 spd 12 hp 14 def 11
+6 rage 2 yes ATK DEF 8 acc 11 spd 12 hp 14 def 11
+5 rage 2 yes ATK DEF 8 acc 11 spd 12 hp 14 def 11

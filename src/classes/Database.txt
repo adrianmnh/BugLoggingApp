@@ -1,0 +1,58 @@
+CREATE TABLE sql5411932.rune_sets ( runeset VARCHAR(15) NOT NULL ) ENGINE = InnoDB;
+insert into rune_sets (runeset) values ('Violent'), ('Swift'), ('Rage'), ('Will'), ('Blade'), ('Nemesis');
+ALTER TABLE `rune_sets` ADD PRIMARY KEY (runeset);
+ALTER TABLE `user_runes` ADD CONSTRAINT `runeset_constraint` FOREIGN KEY (`runeset`) REFERENCES `rune_sets`(`runeset`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE sql5411932.rune_pos ( runepos INT(1) NOT NULL ) ENGINE = InnoDB;
+insert into rune_pos (runepos) values (1), (2), (3), (4), (5), (6);
+alter table rune_pos add primary key (runepos);
+alter table user_runes add CONSTRAINT runepos_constraint FOREIGN KEY (position) REFERENCES rune_pos(runepos) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE sql5411932.rune_innate ( innate VARCHAR(3) NOT NULL ) ENGINE = InnoDB;
+insert into rune_innate (innate) values ('no'), ('yes');
+alter table rune_innate add primary key (innate);
+alter table user_runes add CONSTRAINT innate_constraint FOREIGN KEY (innate) REFERENCES rune_innate(innate) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+CREATE TABLE sql5411932.rune_stats ( runestat VARCHAR(5) NOT NULL ) ENGINE = InnoDB;
+insert into rune_stats (runestat) values ('HP'), ('ATK'), ('DEF'), ('spd'), ('crte'), ('cdmg'), ('res'), ('acc'), ('hp'), ('atk'), ('def');
+alter table rune_stats add PRIMARY KEY (runestat);
+alter table user_runes add CONSTRAINT runestat_constraint FOREIGN KEY (mainstat) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table user_runes add CONSTRAINT sub0_constraint FOREIGN KEY (sub0) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table user_runes add CONSTRAINT sub1_constraint FOREIGN KEY (sub1) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table user_runes add CONSTRAINT sub2_constraint FOREIGN KEY (sub2) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table user_runes add CONSTRAINT sub3_constraint FOREIGN KEY (sub3) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table user_runes add CONSTRAINT sub4_constraint FOREIGN KEY (sub4) REFERENCES rune_stats(runestat) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE sql5411932.rune_grades ( runegrade INT(1) NOT NULL ) ENGINE = InnoDB;
+insert into rune_grades (runegrade) value (5), (6);
+alter table rune_grades add PRIMARY KEY (runegrade);
+alter table user_runes add CONSTRAINT grade_constraint FOREIGN KEY (runegrade) REFERENCES rune_grades(runegrade) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+create function getUserID() returns INTEGER DETERMINISTIC NO SQL return @userid_var;
+
+create view show_user_runes as select * from user_runes where userid = getUserID()
+
+
+select * from (select @userid_var :=1 p) parm , show_user_runes s
+
+select userid, runeid from (select @userid_var :=11 p) parm , user_runes s
+select userid, runeid from (select @userid_var :=11 p) parm , show_user_runes s
+
+
+
+CREATE FUNCTION getUserRunes ( @userID INT(4) )
+RETURNS TABLE
+AS
+RETURN
+    SELECT
+        *
+    FROM
+        user_runes
+    WHERE
+        userid = @userID
