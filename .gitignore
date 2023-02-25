@@ -1,0 +1,8 @@
+# Intellij binaries
+intellij/
+*connection.txt
+*connectionString
+desktop.ini
+.idea
+distro
+JavaApp.iml
