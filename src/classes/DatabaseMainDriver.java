@@ -4,10 +4,15 @@ import panels.MainFrame;
 import runes.Rune;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import panels.MainFrame;
 
 public abstract class DatabaseMainDriver {
 
@@ -33,22 +38,79 @@ public abstract class DatabaseMainDriver {
         this.connectionFile = f; initConnection();
     }
 
-    private BufferedReader getBufferedReaderFromJarRoot() throws Exception{
+//    private void setOS(){
+//        System.out.print("Setting OS to: ");
+//        String os = System.getProperty("os.name").toUpperCase();
+//        if(os.contains("LINUX")){
+//            return "linux";
+//        } else if(os.contains("WINDOWS")){
+//            this.OS = "windows";
+//        } else this.OS = "mac";
+//        System.out.println(os);
+//    }
+//
+//    private void setEXEType(){
+//        String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//        if (jarPath.endsWith(".jar")) {
+//            System.out.println("RUNNING FROM JAR");
+//            this.EXEType = "jar";
+//        } else {
+//            System.out.println("RUNNING FORM EXEcute class");
+//            this.EXEType = "class";
+//        }
+//    }
+//    public Path getRootDir(){
+    public String getRootDir(){
+        Path root = null;
+        String jarPath = null;
+
+        try {
+//            jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            if(System.getProperty("os.name").toLowerCase().contains( "windows")){
+                jarPath = jarPath.replace("/", "\\");
+                jarPath = jarPath.substring(1, jarPath.length());
+            }
+            root = Paths.get(jarPath).getParent();
+            jarPath = root.toString();
+            System.out.println("Using this path: " + jarPath);
+
+
+        } catch (URISyntaxException ex) {
+            System.out.println("Path DNE");
+        }
+        return jarPath;
+//        return root;
+    }
+    private BufferedReader getBufferedReaderFromJarRoot() {
+        BufferedReader bf = null;
 //        try{
             System.out.println("\n\nFrom JAR ROOT::::::  2 :::::::::::");
 
-            String jarDir = System.getProperty("user.dir");
-            File myFile = new File( System.getProperty("user.dir"), "connectionString");
+//            String jarDir = System.getProperty("user.dir");
+            String jarDir = getRootDir();
+        System.out.println(jarDir);
+//            File myFile = new File( System.getProperty("user.dir"), "connectionString");
+            File myFile = new File( jarDir, "connectionString");
+            System.out.println(myFile.getPath());
 
-            if(myFile == null) {
+
+
+//        if(MainFrame.getRootDir())
+
+        if(myFile == null) {
                 System.out.println("not used");
                 return null;
             }
 
             System.out.println("************************\n\t\t\t\tJAR ROOT used\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + jarDir);
+            try{
+                bf = new BufferedReader(new FileReader(myFile));
 
-
-            return new BufferedReader(new FileReader(myFile));
+            } catch (FileNotFoundException e){
+                System.out.println("from jar root ::2:: failed file not found exception");
+            }
+            return  bf;
 
 //        }
 //        catch(FileNotFoundException e2){
@@ -119,16 +181,12 @@ public abstract class DatabaseMainDriver {
         BufferedReader reader = null;
 
         try{
-            if(( reader = getConnectionFileFromMainFrame())==null ) {
-                try {
-                    reader = getBufferedReaderFromJarRoot();
-                } catch (Exception e) {
-                    System.out.println("RunTime Exception");
-                    e.printStackTrace();
+            if(( reader = getConnectionFileFromMainFrame()) == null ) {
+                if ((reader = getBufferedReaderFromJarRoot()) == null) {
                     reader = getBufferedReaderFromSource();
                 }
-            }
 
+            }
             String connectionString = processConnectionString(reader);
 
             System.out.println("Database.Connection");

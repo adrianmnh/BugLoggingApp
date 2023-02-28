@@ -10,7 +10,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LoginPanel extends JPanel implements MyPanels {
+public class LoginPanel extends MyPanels {
 
     public MainFrame PF;
     private JPanel mainPanel;
@@ -51,9 +51,9 @@ public class LoginPanel extends JPanel implements MyPanels {
         PF = p;
     }
 
-    public JPanel getMain(){
-        return mainPanel;
-    }
+//    public JPanel getMain(){
+//        return mainPanel;
+//    }
     public JButton getRuneButton(){
         return moveTo_MainApplicationPortal_Button;
     }
@@ -97,12 +97,14 @@ public class LoginPanel extends JPanel implements MyPanels {
     }
 
     public void initialSetup(){
-        PF.pack();
+//        PF.pack();
+
         System.out.println("Entering logging panel...");
         left_panel_label.setIcon(new ImageIcon(getClass().getClassLoader().getResource("assets/yes2.png")));
         this.moveTo_MainApplicationPortal_Button.setVisible(false);
         createNewAccount_panel.setVisible(false);
         testScript();
+
     }
 
     private void testScript(){
@@ -110,9 +112,10 @@ public class LoginPanel extends JPanel implements MyPanels {
         user_password.setText("password");
     }
 
-    public LoginPanel(MainFrame frame){
-        super();
-        setParent(frame);
+    public LoginPanel(MainFrame f){
+        super(f);
+        setMainPanel(mainPanel);
+//        setParent(frame);
         initialSetup();
 
         //this is added to the username and password fields to execute "enterButton" by pressing Enter
@@ -271,6 +274,7 @@ public class LoginPanel extends JPanel implements MyPanels {
                 login_panel.setVisible(true);
                 createNewAccount_panel.setVisible(false);
                 PF.pack();
+
             }
         });
 
