@@ -4,5 +4,9 @@ intellij/
 *connectionString*
 desktop.ini
 .idea
-distro
+distro/*
 JavaApp.iml
+
+
+# exceptions
+!distro/JavaApp.jar
