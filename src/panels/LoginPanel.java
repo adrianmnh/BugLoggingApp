@@ -6,11 +6,10 @@ import classes.User;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LoginPanel extends MyPanels {
+public class LoginPanel extends MyPanel {
 
     public MainFrame PF;
     private JPanel mainPanel;
@@ -160,10 +159,12 @@ public class LoginPanel extends MyPanels {
 
                 PF.setCurrentUserID(1); // Unused
                 login = user_login.getText();
-//                login = login.replace("\'", "");
                 password = user_password.getPassword();
-                User user = new User(login, password, "");
                 System.out.println("\n -- Credentials --\n");
+                System.out.println(login);
+                login = login.replaceAll("[`~!@#$%^&*()-=\'\"]", "");
+
+                User user = new User(login, password, "");
                 System.out.println(login);
                 System.out.println(password);
                 System.out.println("\n -- END --\n");
@@ -303,7 +304,10 @@ public class LoginPanel extends MyPanels {
                     // option 2 : ok cancel
                     // option 0 : yes no
 
-                    if (newUsername.length() >= 5 && newPass.length >= 5 && newEmail.length() > 0) {
+                    User newUser = new User(newUsername, newPass, newEmail);
+
+//                    if (newUsername.length() >= 5 && newPass.length >= 5 && newEmail.length() > 0) {
+                    if (newUser.testUserInput()) {
                         int reEnterPassword = JOptionPane.showOptionDialog(PF, box, "The title", 2, JOptionPane.PLAIN_MESSAGE, load, null, "");
 
 //                int reEnterPassword = JOptionPane.showOptionDialog(parentFrame, box, "The title", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, load, new String[]{"Ok", "Cancel"}, "");
@@ -317,7 +321,7 @@ public class LoginPanel extends MyPanels {
                             if (Arrays.equals(input, newPass)) {
                                 System.out.println("Passwords match");
 //                        if( !userName.equals("") && userName.length()>5 && pass.length()>5 && !pass.equals("") && email.length()>0 && !email.equals("7")){
-                                User newUser = new User(newUsername, newPass, newEmail);
+//                                User newUser = new User(newUsername, newPass, newEmail);
                                 try {
                                     String query = newacc.addNewUserQuery(newUser);
                                     response = newacc.templateExecuteUpdate_ReturnRowsUpdated(newUser, query);
@@ -330,7 +334,9 @@ public class LoginPanel extends MyPanels {
                                         PF.pack();
                                     } else if(resCode == 2627){
                                         JOptionPane.showMessageDialog(PF, "Username or Email cannot be used.      ", "Failed", JOptionPane.ERROR_MESSAGE, iconNo);
-                                    } else {
+                                    } else if(resCode == 2628){
+                                        JOptionPane.showMessageDialog(PF, "Input is too long", "Failed", JOptionPane.ERROR_MESSAGE, iconNo);
+                                    }else {
                                         JOptionPane.showMessageDialog(PF, "Unknown error. Something went wrong!      ", "Failed", JOptionPane.ERROR_MESSAGE, iconNo);
                                     }
                                 } catch (Exception ex) {
@@ -347,10 +353,10 @@ public class LoginPanel extends MyPanels {
 
                     } else {
                         System.out.println("gETS HERE");
-                        if (newUsername.length() < 5)
-                            JOptionPane.showMessageDialog(PF, "Username must be at least 5 characters     ", "Error", 2, iconNo);
-                        else if (newPass.length < 5)
-                            JOptionPane.showMessageDialog(PF, "Password is too short      ", "Error", 2, iconNo);
+                        if (newUsername.length() < 5 || newUsername.length() > 16)
+                            JOptionPane.showMessageDialog(PF, "Username must be between 5 and 16 characters      ", "Error", 2, iconNo);
+                        else if (newPass.length < 5 || newPass.length > 16)
+                            JOptionPane.showMessageDialog(PF, "Password is too short or long      ", "Error", 2, iconNo);
 //                        else if (newEmail.length() < 12)
 //                            JOptionPane.showMessageDialog(parentFrame, "Email must be 12 characters or longer", "Error", 2, iconNo);
 //

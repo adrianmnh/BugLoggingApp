@@ -18,6 +18,21 @@ public class User {
         this.password = p;
         this.email = e;
     }
+
+    public boolean testUserInput(){
+        if(this.username.length() >= 5 && this.username.length() <= 16){
+            if(this.email.length() >= 10 && this.email.length() <= 50) {
+                if (this.password.length >= 5 && this.password.length <= 16) {
+                    System.out.println(this.username);
+                    System.out.println(this.password);
+                    System.out.println(this.email);
+                    return true;
+                }
+            }
+        }
+//                newPass.length >= 5 && newEmail.length() > 0)
+        return false;
+    }
     public String getUsername(boolean b){
         if(b) return q(this.username);
         return this.username;

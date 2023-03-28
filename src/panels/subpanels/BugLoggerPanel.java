@@ -1,6 +1,7 @@
 package panels.subpanels;
 
 import panels.MainAppPanel;
+import panels.MyPanel;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.io.IOException;
 public class BugLoggerPanel extends JPanel {
 //    private MainFrame PF;
     public JPanel mainPanel;
+
+    private MyPanel parentPanel;
     private JPanel left_panel;
     private JPanel right_panel;
     private JCheckBox checkBox1;
@@ -38,11 +41,14 @@ public class BugLoggerPanel extends JPanel {
         left1 = new JPanel();
         left2 = new JPanel();
         leftScrollPanel = new JScrollPane();
-//        leftScrollPanel = new MainAppPanel.leftScrollPanel(left1, left2);
+        leftScrollPanel = new ScrollPanel(parentPanel, left1, left2);
 //        right_panel = new LoginPanel(PF);
     }
 
-    public BugLoggerPanel(){
+    public BugLoggerPanel(MyPanel parentPanel){
+
+        this.parentPanel = parentPanel;
+
 //        super();
 //        super(f);
 //        setMainPanel(mainPanel);

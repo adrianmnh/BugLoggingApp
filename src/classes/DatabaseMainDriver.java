@@ -453,94 +453,96 @@ public abstract class DatabaseMainDriver {
 //
 //    }
 
-    //RuneDatabaseMethods
-    public boolean addRuneToUser(int user, Rune r){
-        try{
-            if(!userHasRune(user, r)){
-                String sqlQuery = addRuneSQLQuery(user, r);
-                getStatement().execute(sqlQuery);
-                System.out.printf("%s   ****rune added to user %d****\n", r, user);
-                return true;
-            }
-        }catch (SQLException e){
-            System.out.println("Error found on addRuneToUser: " + e);
-            return false;
-        }
-        return false;
-    }
-    private String addRuneSQLQuery(int user, Rune r){
-        //checkIfUserHasRune(user, r);
-        //	userid	runeid	runegrade-runeset-position-innate-mainstat	sub0	val0	sub1	val1	sub2	val2	sub3	val3	sub4	val4
-        String grade = r.getGradeString(), set = r.getSetString(), pos = r.getPositionString(), stat = r.getMainStat().getMainStatAttribute(), innate = r.getInnateString();
-        StringBuilder s = new StringBuilder();
-        s.append( String.format("INSERT INTO user_runes VALUES ('%s', NULL, ", user) );
-        s.append( String.format("'%s', '%s', '%s', '%s', '%s', ", grade, set, pos, innate, stat) );
-        if(r.getInnate()){
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(0).getSubStat(), r.getSubStats().get(0).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(1).getSubStat(), r.getSubStats().get(1).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(2).getSubStat(), r.getSubStats().get(2).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(3).getSubStat(), r.getSubStats().get(3).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(4).getSubStat(), r.getSubStats().get(4).getSubValue()) );
-        }
-        else{
-            s.append("NULL, NULL, ");
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(0).getSubStat(), r.getSubStats().get(0).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(1).getSubStat(), r.getSubStats().get(1).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(2).getSubStat(), r.getSubStats().get(2).getSubValue()) );
-            s.append( String.format("'%s', '%s', ", r.getSubStats().get(3).getSubStat(), r.getSubStats().get(3).getSubValue()) );
-        }
-        s.append("false );");
-        return s.toString();
-    }
-    public boolean userHasRune(int user, Rune rune){
-        boolean toReturn = false;
-        try{
-            ArrayList<Rune> user_runes = getUserRunes(user);
-            for ( Rune r : user_runes ) {
-                if( rune.compareTo(r) == 0 ){
-                    System.out.println("Comparing, true flag hit, user has rune");
-                    return true;
-                }
-                System.out.print("-NOhit-  ");
-            }
 
-            if(toReturn == false){
-//                getStatement().execute(addRuneSQLQuery(user, rune));
-//                System.out.println(rune+ " rune added to" + user);
-//                user_runes.add(rune);
-                return false;
-            }
-        }catch(Exception e){
-            System.out.println("Error found at userHasRune\n " + e.getLocalizedMessage() + "\n"+e.getStackTrace()+"\n"+e.getClass());
-        }
-        return toReturn;
-    }
-    public ArrayList<Rune> getUserRunes(int userid){
-        ArrayList<Rune> runes;
-        // return and arrayList of Runes in the correct format, no null
-        try{
-            String sqlQuery = "select runegrade, runeset, position, innate, mainstat, sub0, val0, sub1, val1, sub2, val2, sub3, val3, sub4, val4 from user_runes where userid = "+userid;
+//    public boolean addRuneToUser(int user, Rune r){
+//
+//        try{
+//            if(!userHasRune(user, r)){
+//                String sqlQuery = addRuneSQLQuery(user, r);
+//                getStatement().execute(sqlQuery);
+//                System.out.printf("%s   ****rune added to user %d****\n", r, user);
+//                return true;
+//            }
+//        }catch (SQLException e){
+//            System.out.println("Error found on addRuneToUser: " + e);
+//            return false;
+//        }
+//        return false;
+//    }
 
-            ResultSet result = getStatement().executeQuery(sqlQuery);
-            //System.out.println("\nThis is existing user TABLE user_runes data fixed without NULL");
-            runes = new ArrayList<>();
-            while(result.next()){
-                String r = "";
-                for(int i=1; i<=result.getMetaData().getColumnCount(); i++){
-                    if(result.getObject(i) != null )
-                        r += result.getObject(i) + " ";
-                }
-                //System.out.println(r + " String used to create Rune objects from existing data");
-                runes.add(new Rune(r));
-            }
-//            System.out.println("\nList of existing Runes:");
-//            for(Rune r : runes)System.out.println(r);
-            return runes;
-        }catch(Exception e){
-            System.out.println("Error found. " + e);
-        }
-        return null;
-    }
+//    private String addRuneSQLQuery(int user, Rune r){
+//        //checkIfUserHasRune(user, r);
+//        //	userid	runeid	runegrade-runeset-position-innate-mainstat	sub0	val0	sub1	val1	sub2	val2	sub3	val3	sub4	val4
+//        String grade = r.getGradeString(), set = r.getSetString(), pos = r.getPositionString(), stat = r.getMainStat().getMainStatAttribute(), innate = r.getInnateString();
+//        StringBuilder s = new StringBuilder();
+//        s.append( String.format("INSERT INTO user_runes VALUES ('%s', NULL, ", user) );
+//        s.append( String.format("'%s', '%s', '%s', '%s', '%s', ", grade, set, pos, innate, stat) );
+//        if(r.getInnate()){
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(0).getSubStat(), r.getSubStats().get(0).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(1).getSubStat(), r.getSubStats().get(1).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(2).getSubStat(), r.getSubStats().get(2).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(3).getSubStat(), r.getSubStats().get(3).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(4).getSubStat(), r.getSubStats().get(4).getSubValue()) );
+//        }
+//        else{
+//            s.append("NULL, NULL, ");
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(0).getSubStat(), r.getSubStats().get(0).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(1).getSubStat(), r.getSubStats().get(1).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(2).getSubStat(), r.getSubStats().get(2).getSubValue()) );
+//            s.append( String.format("'%s', '%s', ", r.getSubStats().get(3).getSubStat(), r.getSubStats().get(3).getSubValue()) );
+//        }
+//        s.append("false );");
+//        return s.toString();
+//    }
+//    public boolean userHasRune(int user, Rune rune){
+//        boolean toReturn = false;
+//        try{
+//            ArrayList<Rune> user_runes = getUserRunes(user);
+//            for ( Rune r : user_runes ) {
+//                if( rune.compareTo(r) == 0 ){
+//                    System.out.println("Comparing, true flag hit, user has rune");
+//                    return true;
+//                }
+//                System.out.print("-NOhit-  ");
+//            }
+//
+//            if(toReturn == false){
+////                getStatement().execute(addRuneSQLQuery(user, rune));
+////                System.out.println(rune+ " rune added to" + user);
+////                user_runes.add(rune);
+//                return false;
+//            }
+//        }catch(Exception e){
+//            System.out.println("Error found at userHasRune\n " + e.getLocalizedMessage() + "\n"+e.getStackTrace()+"\n"+e.getClass());
+//        }
+//        return toReturn;
+//    }
+//    public ArrayList<Rune> getUserRunes(int userid){
+//        ArrayList<Rune> runes;
+//        // return and arrayList of Runes in the correct format, no null
+//        try{
+//            String sqlQuery = "select runegrade, runeset, position, innate, mainstat, sub0, val0, sub1, val1, sub2, val2, sub3, val3, sub4, val4 from user_runes where userid = "+userid;
+//
+//            ResultSet result = getStatement().executeQuery(sqlQuery);
+//            //System.out.println("\nThis is existing user TABLE user_runes data fixed without NULL");
+//            runes = new ArrayList<>();
+//            while(result.next()){
+//                String r = "";
+//                for(int i=1; i<=result.getMetaData().getColumnCount(); i++){
+//                    if(result.getObject(i) != null )
+//                        r += result.getObject(i) + " ";
+//                }
+//                //System.out.println(r + " String used to create Rune objects from existing data");
+//                runes.add(new Rune(r));
+//            }
+////            System.out.println("\nList of existing Runes:");
+////            for(Rune r : runes)System.out.println(r);
+//            return runes;
+//        }catch(Exception e){
+//            System.out.println("Error found. " + e);
+//        }
+//        return null;
+//    }
 
 
 

@@ -1,8 +1,11 @@
 package panels;
 
 
-import panels.subpanels.BugLoggerPanel;
 
+import classes.DatabaseUserDriver;
+import classes.RSTable;
+import panels.subpanels.BugLoggerPanel;
+import panels.subpanels.ScrollPanel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,9 +14,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import classes.Helper;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import static classes.Helper.*;
+import static classes.Helper.processResultSet;
 
-public class MainAppPanel extends  MyPanels {
+public class MainAppPanel extends MyPanel {
 
 //    public MainFrame PF;
 
@@ -55,6 +62,8 @@ public class MainAppPanel extends  MyPanels {
 
         JPanel imagePanel = new JPanel();
 
+//        loadAssetsIntoPanels();
+
         getParentFrame().pack();
 
 
@@ -85,89 +94,89 @@ public class MainAppPanel extends  MyPanels {
         try{
 
 //            leftScrollPanel = new leftScrollPanel(PF,  left1, left2);
-            leftScrollPanel = new leftScrollPanel(this,  left1, left2);
+            leftScrollPanel = new ScrollPanel(this,  left1, left2);
         } catch (Exception e){
             System.out.println("SOMETHING WENT WRONG");
         }
 
 
 //        testPanel = new LoginPanel(this.PF);
-        BugLoggerPanel bg = new BugLoggerPanel();
+        BugLoggerPanel bg = new BugLoggerPanel(this);
 
         testPanel = bg.mainPanel;
 
     }
 
-    public void loadAssetsIntoPanels() {
-//        System.out.println(this.getParentFrame().localAssetMap);
-        int counter = 0;
-        for (int i = 0; i < 5; i++) {
-//            for (Object f : this.getParentFrame().localAssetMap.values()) {
-//            for (Object f : this.getParentFrame().localAssetMap.keySet()) {
-            for (String name : this.getParentFrame().localAssetList) {
-                System.out.println("\n" + name);
-//                for (File f: imageFiles){
-
-//                    Image img = ImageIO.read(f);
-//                    JLabel l = new JLabel(new ImageIcon(img));
-
-
-//                    ByteArrayInputStream bis = new ByteArrayInputStream((byte[])f);
-
-//                    ImageIcon img = ImageIO.read(bis);
-                ImageIcon img = new ImageIcon(getClass().getClassLoader().getResource(name));
-                JLabel l = new JLabel(img);
-
-
-//                    ImageIcon ii = new ImageIcon(img);
-//                    l.setIcon(ii);
-
-
-//                l.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//                        // Handle mouse click
-//                        System.out.println(e.getX() + " " + e.getY());
-////                            System.out.println(e.getPoint());
+//    public void loadAssetsIntoPanels() {
+////        System.out.println(this.getParentFrame().localAssetMap);
+//        int counter = 0;
+//        for (int i = 0; i < 5; i++) {
+////            for (Object f : this.getParentFrame().localAssetMap.values()) {
+////            for (Object f : this.getParentFrame().localAssetMap.keySet()) {
+//            for (String name : this.getParentFrame().localAssetList) {
+//                System.out.println("\n" + name);
+////                for (File f: imageFiles){
 //
-//                    }
-//                });
-                left1.add(l);
-//                        left1.add(new JLabel(new ImageIcon(img)));
-                JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
-                j.setFont(new Font(null, Font.PLAIN, 10));
-                j.setPreferredSize(new Dimension(180, ICON_HEIGHT - 5));
-                j.setMinimumSize(new Dimension(180, ICON_HEIGHT - 5));
-                j.setMaximumSize(new Dimension(180, ICON_HEIGHT - 5));
-                left2.add(j);
-                counter++;
-
-            }
-            left1.setPreferredSize(new Dimension(-1, counter * ICON_HEIGHT));
-//            left1.setPreferredSize(new Dimension(-1, -1));
-
-            this.getParentFrame().pack();
-        }
-
-        System.out.println(counter * ICON_HEIGHT);
-        left1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e2) {
-                // Handle mouse click
-                System.out.println(e2.getX() + " " + e2.getY() + "\n");
-//                            System.out.println(e.getLocationOnScreen());
-//                            System.out.println(e.getPoint());
-                String imgClicked = "";
-                int pos = e2.getY() / ICON_HEIGHT ;
-                int assetPosInList = pos % getParentFrame().localAssetList.size();
-                System.out.println(assetPosInList);
-                System.out.println("Clicked on -- " + getParentFrame().localAssetList.get(assetPosInList));
-                JOptionPane.showMessageDialog(getParentFrame(),"Clicked on -- " + getParentFrame().localAssetList.get(assetPosInList) , "Watcher", JOptionPane.INFORMATION_MESSAGE, getParentFrame().getImg(assetPosInList));
-
-
-            }
-        });
-    }
+////                    Image img = ImageIO.read(f);
+////                    JLabel l = new JLabel(new ImageIcon(img));
+//
+//
+////                    ByteArrayInputStream bis = new ByteArrayInputStream((byte[])f);
+//
+////                    ImageIcon img = ImageIO.read(bis);
+//                ImageIcon img = new ImageIcon(getClass().getClassLoader().getResource(name));
+//                JLabel l = new JLabel(img);
+//
+//
+////                    ImageIcon ii = new ImageIcon(img);
+////                    l.setIcon(ii);
+//
+//
+////                l.addMouseListener(new MouseAdapter() {
+////                    @Override
+////                    public void mouseClicked(MouseEvent e) {
+////                        // Handle mouse click
+////                        System.out.println(e.getX() + " " + e.getY());
+//////                            System.out.println(e.getPoint());
+////
+////                    }
+////                });
+//                left1.add(l);
+////                        left1.add(new JLabel(new ImageIcon(img)));
+//                JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
+//                j.setFont(new Font(null, Font.PLAIN, 10));
+//                j.setPreferredSize(new Dimension(180, ICON_HEIGHT - 5));
+//                j.setMinimumSize(new Dimension(180, ICON_HEIGHT - 5));
+//                j.setMaximumSize(new Dimension(180, ICON_HEIGHT - 5));
+//                left2.add(j);
+//                counter++;
+//
+//            }
+//            left1.setPreferredSize(new Dimension(-1, counter * ICON_HEIGHT));
+////            left1.setPreferredSize(new Dimension(-1, -1));
+//
+//            this.getParentFrame().pack();
+//        }
+//
+//        System.out.println(counter * ICON_HEIGHT);
+//        left1.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseReleased(MouseEvent e2) {
+//                // Handle mouse click
+//                System.out.println(e2.getX() + " " + e2.getY() + "\n");
+////                            System.out.println(e.getLocationOnScreen());
+////                            System.out.println(e.getPoint());
+//                String imgClicked = "";
+//                int pos = e2.getY() / ICON_HEIGHT ;
+//                int assetPosInList = pos % getParentFrame().localAssetList.size();
+//                System.out.println(assetPosInList);
+//                System.out.println("Clicked on -- " + getParentFrame().localAssetList.get(assetPosInList));
+//                JOptionPane.showMessageDialog(getParentFrame(),"Clicked on -- " + getParentFrame().localAssetList.get(assetPosInList) , "Watcher", JOptionPane.INFORMATION_MESSAGE, getParentFrame().getImg(assetPosInList));
+//
+//
+//            }
+//        });
+//    }
 
 
     class ImageGridForm extends JPanel {
@@ -330,6 +339,58 @@ public class MainAppPanel extends  MyPanels {
 //                readImage(stream);
 
 
+                    DatabaseUserDriver db = new DatabaseUserDriver(f.connectionFile);
+
+                    db.setDbSchema("Users");
+                    db.setDbTable("Account");
+
+                    ArrayList<Object> ar = db.execQuery("SELECT * FROM BugLogger.Project");
+    //                db.printAllTableData();
+    //
+
+                    ResultSet rs = (ResultSet)(ar.get(1));
+
+
+                RSTable tbl = new RSTable(rs);
+
+                System.out.println(tbl.header);
+
+                    System.out.println(tbl);
+
+
+//                    byte[] imageData = rs.getBytes("img1");
+//                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
+//
+//                    ImageIO.write(img, "jpg", new File("TESTTESTTEST.jpg"));
+//
+//                    ImageIcon icon = new ImageIcon(img);
+//
+//                JOptionPane.showMessageDialog(f, "test", "message", JOptionPane.INFORMATION_MESSAGE, icon);
+//                    while(rs.next()) {
+//                        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+//                            if (rs.getObject(i) != null)
+//                                System.out.println(rs.getObject(i) + " ");
+//                        }
+//                    }
+
+
+
+
+//                    System.out.println(rs.next());
+//                    rs.next();
+//                    rs.next();
+//
+//
+//
+
+
+                db.closeConnection();
+
+
+
+
+
+
 
 
             }
@@ -373,8 +434,8 @@ public class MainAppPanel extends  MyPanels {
                     printImageData(selectedFile);
                 }
 
-
                 JOptionPane.showMessageDialog(f, projectDir, f.getEXEType(), JOptionPane.INFORMATION_MESSAGE, f.getImg(1));
+
 
                 for (String s : f.localAssetList)
                     System.out.println(s);
@@ -401,115 +462,115 @@ public class MainAppPanel extends  MyPanels {
         }
     }
 
-    public static class leftScrollPanel extends JScrollPane{
-//        public leftScrollPanel(MainFrame PF, JPanel left1, JPanel left2) throws IOException {
-        public leftScrollPanel(MyPanels PF, JPanel left1, JPanel left2)  {
-//            leftScrollPanel = new JScrollPane();
-//        leftScrollPanel.setMaximumSize(new Dimension(50,50));
-
-            String projectDir = System.getProperty("user.dir");
-            String assetsDir = "/src/assets/monsters/";
-            System.out.println("\n\n\n\n\nADDING CONTENT");
-
-//            System.out.println(PF.getParentFrame().localAssetList);
-
-
-
-// START HERE -----------------------------------------------------------------
-
-
-
-
-//            InputStream is = getClass().getClassLoader().getResourceAsStream(projectDir + assetsDir);
-//            System.out.println(is);
-//            try (JarFile jarFile = new JarFile(assetsDir)) {
-//                Enumeration<JarEntry> entries = jarFile.entries();
-//                while (entries.hasMoreElements()) {
-//                    JarEntry entry = entries.nextElement();
-//                    System.out.println(entry.getName());
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-
-
-            ///////////THIS WORKS ON INTELLIJ ONLY NOT ON JAR----------------------------------------------------------
-//            int counter = 0;
-//            for (int i = 0; i < 5; i++) {
-//                for(Object f : PF.getParentFrame().localAssetMap.values()){
+//    public static class leftScrollPanel extends JScrollPane{
+////        public leftScrollPanel(MainFrame PF, JPanel left1, JPanel left2) throws IOException {
+//        public leftScrollPanel(MyPanels PF, JPanel left1, JPanel left2)  {
+////            leftScrollPanel = new JScrollPane();
+////        leftScrollPanel.setMaximumSize(new Dimension(50,50));
+//
+//            String projectDir = System.getProperty("user.dir");
+//            String assetsDir = "/src/assets/monsters/";
+//            System.out.println("\n\n\n\n\nADDING CONTENT");
+//
+////            System.out.println(PF.getParentFrame().localAssetList);
+//
+//
+//
+//// START HERE -----------------------------------------------------------------
+//
+//
+//
+//
+////            InputStream is = getClass().getClassLoader().getResourceAsStream(projectDir + assetsDir);
+////            System.out.println(is);
+////            try (JarFile jarFile = new JarFile(assetsDir)) {
+////                Enumeration<JarEntry> entries = jarFile.entries();
+////                while (entries.hasMoreElements()) {
+////                    JarEntry entry = entries.nextElement();
+////                    System.out.println(entry.getName());
+////                }
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+//
+//
+//
+//            ///////////THIS WORKS ON INTELLIJ ONLY NOT ON JAR----------------------------------------------------------
+////            int counter = 0;
+////            for (int i = 0; i < 5; i++) {
+////                for(Object f : PF.getParentFrame().localAssetMap.values()){
+//////                for (File f: imageFiles){
+////                    try {
+//////                        System.out.println(f);
+////                        ByteArrayInputStream bis = new ByteArrayInputStream((byte[])f);
+////                        BufferedImage img = ImageIO.read(bis);
+////                        JLabel l = new JLabel(new ImageIcon(img));
+////                        l.addMouseListener(new MouseAdapter() {
+////                            @Override
+////                            public void mouseClicked(MouseEvent e) {
+////                                // Handle mouse click
+////                                System.out.println(e.getX() + " " + e.getY());
+////
+////                            }
+////                        });
+////                        left1.add(l);
+//////                        left1.add(new JLabel(new ImageIcon(img)));
+////                        JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
+////                        j.setFont(new Font(null, Font.PLAIN, 10));
+////                        j.setPreferredSize(new Dimension(180, ICON_HEIGHT-5));
+////                        left2.add(j);
+////                        counter++;
+////                    } catch (IOException e) {
+////                        throw new RuntimeException(e);
+////
+////                    }
+////
+////                }
+////
+////            }
+////            left1.setPreferredSize(new Dimension(-1, counter*ICON_HEIGHT));
+////            PF.getParentFrame().pack();
+//////////////////--------------------------------------------------------------------------------------------------------
+//
+//
+//            ///////////// IN CASE IT BREKAS
+////            File[] imageFiles = new File("src/assets/monsters").listFiles();
+////            int counter = 0;
+////            for (int i = 0; i < 5; i++) {
 ////                for (File f: imageFiles){
-//                    try {
+////                    try {
 ////                        System.out.println(f);
-//                        ByteArrayInputStream bis = new ByteArrayInputStream((byte[])f);
-//                        BufferedImage img = ImageIO.read(bis);
-//                        JLabel l = new JLabel(new ImageIcon(img));
-//                        l.addMouseListener(new MouseAdapter() {
-//                            @Override
-//                            public void mouseClicked(MouseEvent e) {
-//                                // Handle mouse click
-//                                System.out.println(e.getX() + " " + e.getY());
+////                        Image img = ImageIO.read(f);
+////                        JLabel l = new JLabel(new ImageIcon(img));
+////                        l.addMouseListener(new MouseAdapter() {
+////                            @Override
+////                            public void mouseClicked(MouseEvent e) {
+////                                // Handle mouse click
+////                                System.out.println(e.getX() + " " + e.getY());
+////
+////                            }
+////                        });
+////                        left1.add(l);
+//////                        left1.add(new JLabel(new ImageIcon(img)));
+////                        JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
+////                        j.setFont(new Font(null, Font.PLAIN, 10));
+////                        j.setPreferredSize(new Dimension(180, ICON_HEIGHT-5));
+////                        left2.add(j);
+////                        counter++;
+////                    } catch (IOException e) {
+////                        throw new RuntimeException(e);
+////
+////                    }
+////
+////                }
+////
+////            }
+////            left1.setPreferredSize(new Dimension(-1, counter*ICON_HEIGHT));
 //
-//                            }
-//                        });
-//                        left1.add(l);
-////                        left1.add(new JLabel(new ImageIcon(img)));
-//                        JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
-//                        j.setFont(new Font(null, Font.PLAIN, 10));
-//                        j.setPreferredSize(new Dimension(180, ICON_HEIGHT-5));
-//                        left2.add(j);
-//                        counter++;
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
 //
-//                    }
+//        }
 //
-//                }
-//
-//            }
-//            left1.setPreferredSize(new Dimension(-1, counter*ICON_HEIGHT));
-//            PF.getParentFrame().pack();
-////////////////--------------------------------------------------------------------------------------------------------
-
-
-            ///////////// IN CASE IT BREKAS
-//            File[] imageFiles = new File("src/assets/monsters").listFiles();
-//            int counter = 0;
-//            for (int i = 0; i < 5; i++) {
-//                for (File f: imageFiles){
-//                    try {
-//                        System.out.println(f);
-//                        Image img = ImageIO.read(f);
-//                        JLabel l = new JLabel(new ImageIcon(img));
-//                        l.addMouseListener(new MouseAdapter() {
-//                            @Override
-//                            public void mouseClicked(MouseEvent e) {
-//                                // Handle mouse click
-//                                System.out.println(e.getX() + " " + e.getY());
-//
-//                            }
-//                        });
-//                        left1.add(l);
-////                        left1.add(new JLabel(new ImageIcon(img)));
-//                        JTextArea j = new JTextArea("hellohellohellohellohello\nhellohellohellohellohello\nhellohellohellohellohello\n");
-//                        j.setFont(new Font(null, Font.PLAIN, 10));
-//                        j.setPreferredSize(new Dimension(180, ICON_HEIGHT-5));
-//                        left2.add(j);
-//                        counter++;
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//
-//                    }
-//
-//                }
-//
-//            }
-//            left1.setPreferredSize(new Dimension(-1, counter*ICON_HEIGHT));
-
-
-        }
-
-    }
+//    }
 
 
 

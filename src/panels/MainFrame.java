@@ -115,7 +115,9 @@ public class MainFrame extends JFrame {
     private void initializePanels(){
         login_panel = new LoginPanel(this);
         mainApp_panel = new MainAppPanel(this);
-        mainApp_panel.loadAssetsIntoPanels();
+
+//        mainApp_panel.loadAssetsIntoPanels();
+
 //        bg = new BugLoggerPanel();
     }
 
