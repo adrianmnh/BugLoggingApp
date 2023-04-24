@@ -29,7 +29,7 @@ public class ScrollPanel extends JScrollPane {
 
         String projectDir = System.getProperty("user.dir");
         String assetsDir = "/src/assets/monsters/";
-        System.out.println("\n\n\n\n\nADDING CONTENT");
+//        System.out.println("\n\n\n\n\nADDING CONTENT");
 
 
 
@@ -138,7 +138,7 @@ public class ScrollPanel extends JScrollPane {
 //            for (Object f : this.getParentFrame().localAssetMap.values()) {
 //            for (Object f : this.getParentFrame().localAssetMap.keySet()) {
             for (String name : this.f.localAssetList) {
-                System.out.println("\n" + name);
+//                System.out.println("\n" + name);
 //                for (File f: imageFiles){
 
 //                    Image img = ImageIO.read(f);
@@ -154,7 +154,7 @@ public class ScrollPanel extends JScrollPane {
 //                l.setMaximumSize(new Dimension(ICON_HEIGHT, ICON_HEIGHT-10));
 //                l.setPreferredSize(new Dimension(ICON_HEIGHT, ICON_HEIGHT-10));
                 l.setVerticalAlignment(0);
-                System.out.println(l.getVerticalAlignment());
+//                System.out.println(l.getVerticalAlignment());
 
 //                    ImageIcon ii = new ImageIcon(img);
 //                    l.setIcon(ii);
@@ -186,7 +186,8 @@ public class ScrollPanel extends JScrollPane {
             this.f.pack();
         }
 
-        System.out.println(counter * ICON_HEIGHT);
+//        System.out.println(counter * ICON_HEIGHT);
+
         left1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e2) {

@@ -15,6 +15,7 @@ public class RSTable extends ArrayList<Object> {
 
     public RSTable(ResultSet rs){
         processResultSet(rs);
+        System.out.println(this);
     }
     private void processResultSet(ResultSet rs){
         try{

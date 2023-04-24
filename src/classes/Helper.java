@@ -14,5 +14,10 @@ public class Helper {
 
     }
 
+    public static void printCurrentClassName(){
+        StackTraceElement t = Thread.currentThread().getStackTrace()[2];
+        System.out.println(t.getClassName().replace("classes.", "::::")+":::"+t.getMethodName());
+    }
+
 }
 

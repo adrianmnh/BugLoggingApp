@@ -10,15 +10,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import static classes.Helper.*;
-import static classes.Helper.processResultSet;
 
 public class MainAppPanel extends MyPanel {
 
@@ -33,7 +32,7 @@ public class MainAppPanel extends MyPanel {
     private JPanel mainTopPanel;
     private JButton button1;
     private JButton button2;
-    private JButton button3;
+    private JButton algoApplicationButton;
     private JButton openFile_button;
     private JPanel testPanel;
     private JPanel mainRightPanel;
@@ -350,12 +349,9 @@ public class MainAppPanel extends MyPanel {
 
                     ResultSet rs = (ResultSet)(ar.get(1));
 
-
                 RSTable tbl = new RSTable(rs);
+                db.closeConnection();
 
-                System.out.println(tbl.header);
-
-                    System.out.println(tbl);
 
 
 //                    byte[] imageData = rs.getBytes("img1");
@@ -384,7 +380,6 @@ public class MainAppPanel extends MyPanel {
 //
 
 
-                db.closeConnection();
 
 
 
@@ -440,6 +435,14 @@ public class MainAppPanel extends MyPanel {
                 for (String s : f.localAssetList)
                     System.out.println(s);
 
+
+            }
+        });
+        algoApplicationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("HELLO");
+                f.setPanelTo(f.algo_panel);
 
             }
         });

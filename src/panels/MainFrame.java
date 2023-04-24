@@ -33,6 +33,8 @@ public class MainFrame extends JFrame {
 //    public BugLoggerPanel bg = new BugLoggerPanel();
     public LoginPanel login_panel;
     public MainAppPanel mainApp_panel;
+
+    public AlgoPanel algo_panel;
 //    public BugLoggerPanel bg;
 
     public ImageIcon loadImageIcon(String name){
@@ -79,8 +81,8 @@ public class MainFrame extends JFrame {
     private String rootDir;
 
 
-    public void setPanelTo(JPanel jp){
-        this.CURRENT_panel = jp;
+    public void setPanelTo(MyPanel jp){
+        this.CURRENT_panel = jp.getMain();
         this.setContentPane(CURRENT_panel);
         this.pack();
         this.setLocationRelativeTo(null);
@@ -115,6 +117,7 @@ public class MainFrame extends JFrame {
     private void initializePanels(){
         login_panel = new LoginPanel(this);
         mainApp_panel = new MainAppPanel(this);
+        algo_panel = new AlgoPanel(this);
 
 //        mainApp_panel.loadAssetsIntoPanels();
 
@@ -171,11 +174,14 @@ public class MainFrame extends JFrame {
 
 
         initializePanels();
+//        setPanelTo(login_panel);
 
 //        setPanelTo(mainApp_panel.getMain());
-        setPanelTo(login_panel.getMain());
 //        mainApp_panel = new MainAppPanel(this);
 //        setPanelTo(bg.getMain());
+
+
+        setPanelTo(algo_panel);
 
     }
 

@@ -6,6 +6,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import classes.RSTable;
+import static classes.Helper.*;
 
 public class DatabaseUserDriver extends DatabaseMainDriver {
 //    private Connection con;
@@ -59,6 +61,7 @@ public class DatabaseUserDriver extends DatabaseMainDriver {
             ArrayList response = this.execQuery(this.SQLSearchUser(u.getUsername(false)));
             System.out.println("Response from main driver: " +  response);
             rs = (ResultSet) response.get(1);
+
             toReturn.set(0, (int)response.get(0));
             /// new exception nested
             if(rs != null && rs.next()){
@@ -141,6 +144,7 @@ public class DatabaseUserDriver extends DatabaseMainDriver {
 //
 //    }
     public String SQLSearchUser(String u){
+        printCurrentClassName();
         String query = "SELECT * FROM " + getFQTN() + " WHERE UserName = '" + u + "';";
         return query;
     }
