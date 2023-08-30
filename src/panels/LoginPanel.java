@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class LoginPanel extends MyPanel {
 
-    public MainFrame PF;
+//    public MainFrame PF;
     private JPanel mainPanel;
     private JPasswordField user_password;
     private JFormattedTextField user_login;
@@ -46,9 +46,9 @@ public class LoginPanel extends MyPanel {
 
     public int counter = 0;
 
-    public void setParent(MainFrame p){
-        PF = p;
-    }
+//    public void setParent(MainFrame p){
+//        this.PF = p;
+//    }
 
 //    public JPanel getMain(){
 //        return mainPanel;
@@ -219,9 +219,10 @@ public class LoginPanel extends MyPanel {
                 System.out.println("********************");
 //                System.out.println("currnt userid: " + PF.getCurrentUserID());
                 System.out.println("********************");
-                PF.changePanel_MainApp();
 //                parentFrame.setPanelTo(parentFrame.mainApp_panel.getMain());
 
+//                PF.changePanel_MainApp();
+                PF.changePanel_SummonersWarApp();
             }
         });
 

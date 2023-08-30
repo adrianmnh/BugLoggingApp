@@ -10,6 +10,7 @@ public class MyPanel extends JPanel {
      public JPanel mainPanel;
 
      public void setParent(MainFrame f) {
+          System.out.println("gets used here");
           this.PF = f;
      }
 

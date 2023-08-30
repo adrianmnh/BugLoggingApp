@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="panels.CreateRunePanel">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="100" y="73" width="569" height="497"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="87d92" binding="left_panel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="28" height="24"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="a9af7" class="javax.swing.JLabel" binding="left_panel_label">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="left_panel_img"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="420fc" binding="top_panel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="e90ca" class="javax.swing.JLabel" binding="top_panel_label">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="top_panel_img"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="c362b" binding="right_panel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="2" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b933d" class="javax.swing.JLabel" binding="right_panel_label">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="right_panel_img"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="71020" binding="mainstat_panel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="3d3df" class="javax.swing.JComboBox" binding="setList">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--RuneSet--"/>
+                <item value="Violent"/>
+                <item value="Swift"/>
+                <item value="Rage"/>
+                <item value="Will"/>
+                <item value="Blade"/>
+                <item value="Nemesis"/>
+              </model>
+            </properties>
+          </component>
+          <component id="eaa5e" class="javax.swing.JRadioButton" binding="grade1">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="5"/>
+            </properties>
+          </component>
+          <component id="96d28" class="javax.swing.JLabel" binding="grade_label">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Star Grade:"/>
+            </properties>
+          </component>
+          <component id="ca18a" class="javax.swing.JComboBox" binding="posList">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--RunePos--"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="3"/>
+                <item value="4"/>
+                <item value="5"/>
+                <item value="6"/>
+              </model>
+            </properties>
+          </component>
+          <component id="bada5" class="javax.swing.JComboBox" binding="statList">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--MainStat--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="atk"/>
+                <item value="def"/>
+                <item value="hp"/>
+              </model>
+            </properties>
+          </component>
+          <component id="1abdc" class="javax.swing.JButton" binding="substatButton">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="add substats"/>
+            </properties>
+          </component>
+          <component id="65cdb" class="javax.swing.JRadioButton" binding="innate_yes">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Yes"/>
+            </properties>
+          </component>
+          <component id="a937" class="javax.swing.JLabel" binding="innate_label">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Innate:"/>
+            </properties>
+          </component>
+          <component id="6f5fe" class="javax.swing.JRadioButton" binding="grade2">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="6"/>
+            </properties>
+          </component>
+          <component id="52fc" class="javax.swing.JRadioButton" binding="innate_no">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="No"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="e720a" binding="mainstat_buttons" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="d5dac" class="javax.swing.JButton" binding="clearButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Reset"/>
+            </properties>
+          </component>
+          <component id="d48ee" class="javax.swing.JButton" binding="enterButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Enter"/>
+            </properties>
+          </component>
+          <component id="b932e" class="javax.swing.JButton" binding="backButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Back"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="365a4" binding="substat_panel" layout-manager="GridLayoutManager" row-count="6" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="cde83" class="javax.swing.JComboBox" binding="sub1">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--Sub1--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="atk"/>
+                <item value="def"/>
+                <item value="hp"/>
+              </model>
+            </properties>
+          </component>
+          <component id="8b0ec" class="javax.swing.JComboBox" binding="sub2">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--Sub2--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="atk"/>
+                <item value="def"/>
+                <item value="hp"/>
+              </model>
+            </properties>
+          </component>
+          <component id="d78d7" class="javax.swing.JComboBox" binding="sub3">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--Sub3--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="atk"/>
+                <item value="def"/>
+                <item value="hp"/>
+              </model>
+            </properties>
+          </component>
+          <component id="28f6c" class="javax.swing.JComboBox" binding="sub4">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--Sub4--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="Att"/>
+                <item value="Def"/>
+                <item value="HP"/>
+              </model>
+            </properties>
+          </component>
+          <component id="eef6e" class="javax.swing.JComboBox" binding="sub0">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="--Innate--"/>
+                <item value="SPD"/>
+                <item value="ATK%"/>
+                <item value="HP%"/>
+                <item value="DEF%"/>
+                <item value="CRte%"/>
+                <item value="CDmg%"/>
+                <item value="ACC%"/>
+                <item value="RES%"/>
+                <item value="atk"/>
+                <item value="def"/>
+                <item value="hp"/>
+              </model>
+            </properties>
+          </component>
+          <vspacer id="ca980">
+            <constraints>
+              <grid row="1" column="2" row-span="5" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <component id="a7ea0" class="javax.swing.JTextField" binding="sub_val0">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="3014d" class="javax.swing.JTextField" binding="sub_val1">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="699c1" class="javax.swing.JTextField" binding="sub_val2">
+            <constraints>
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="33058" class="javax.swing.JTextField" binding="sub_val3">
+            <constraints>
+              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="c2c7d" class="javax.swing.JTextField" binding="sub_val4">
+            <constraints>
+              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <vspacer id="fa933">
+            <constraints>
+              <grid row="1" column="4" row-span="5" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <component id="60d64" class="javax.swing.JLabel" binding="substat_panel_label">
+            <constraints>
+              <grid row="1" column="5" row-span="5" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="substat_panel_img"/>
+            </properties>
+          </component>
+          <component id="29262" class="javax.swing.JLabel" binding="innatelabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="innate"/>
+            </properties>
+          </component>
+          <component id="c900b" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="substat1"/>
+            </properties>
+          </component>
+          <component id="59a64" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="substat2"/>
+            </properties>
+          </component>
+          <component id="bd6aa" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="substat3"/>
+            </properties>
+          </component>
+          <component id="a07b7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="substat4"/>
+            </properties>
+          </component>
+          <component id="4a803" class="javax.swing.JLabel" binding="rune_main_stat_label">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="The rune label"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="2e7" binding="bottom_panel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="ee656" class="javax.swing.JLabel" binding="bottom_panel_label">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="bottom_panel_img"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="5b685" binding="substat_buttons" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="13621" class="javax.swing.JButton" binding="enterSubsButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Enter"/>
+            </properties>
+          </component>
+          <component id="18412" class="javax.swing.JButton" binding="clearSubsButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Reset"/>
+            </properties>
+          </component>
+          <component id="50907" class="javax.swing.JButton" binding="backSubsButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Back"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="grade_group">
+      <member id="eaa5e"/>
+      <member id="6f5fe"/>
+    </group>
+    <group name="innate_group">
+      <member id="52fc"/>
+      <member id="65cdb"/>
+    </group>
+  </buttonGroups>
+</form>

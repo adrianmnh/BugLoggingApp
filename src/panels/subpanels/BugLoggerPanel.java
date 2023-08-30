@@ -1,6 +1,5 @@
 package panels.subpanels;
 
-import panels.MainAppPanel;
 import panels.MyPanel;
 
 import javax.swing.*;
@@ -40,7 +39,7 @@ public class BugLoggerPanel extends JPanel {
         // TODO: place custom component creation code here
         left1 = new JPanel();
         left2 = new JPanel();
-        leftScrollPanel = new JScrollPane();
+//        leftScrollPanel = new JScrollPane();
         leftScrollPanel = new ScrollPanel(parentPanel, left1, left2);
 //        right_panel = new LoginPanel(PF);
     }

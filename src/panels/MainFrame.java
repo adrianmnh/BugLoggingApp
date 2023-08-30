@@ -1,9 +1,6 @@
 package panels;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +29,9 @@ public class MainFrame extends JFrame {
 //    public MainAppPanel mainApp_panel = new MainAppPanel(this);
 //    public BugLoggerPanel bg = new BugLoggerPanel();
     public LoginPanel login_panel;
-    public MainAppPanel mainApp_panel;
+    public MainAppPanel_REAL mainApp_panel;
+    public SummonersWarAppPanel sw_mainApp_panel;
+    public SummonersWarPanel_modded summonersWarPanel_panel;
 
     public AlgoPanel algo_panel;
 //    public BugLoggerPanel bg;
@@ -92,7 +91,20 @@ public class MainFrame extends JFrame {
     public void changePanel_MainApp() {
         System.out.println("Entered app UI...");
         this.setVisible(true);
+        // important** back to normal
         this.CURRENT_panel = mainApp_panel.getMain();
+//        this.CURRENT_panel = sw_mainApp_panel.getMain();
+        this.setContentPane(CURRENT_panel);
+        this.pack();
+        this.setLocationRelativeTo(null);
+//        this.setLocation(this.getX()-450, this.getY()-100);
+    }
+
+    public void changePanel_SummonersWarApp(){
+        System.out.println("Entered Summoners War app UI...");
+        this.setVisible(true);
+//        this.CURRENT_panel = summonersWarPanel_panel.getMain();
+        this.CURRENT_panel = sw_mainApp_panel.getMain();
         this.setContentPane(CURRENT_panel);
         this.pack();
         this.setLocationRelativeTo(null);
@@ -116,8 +128,10 @@ public class MainFrame extends JFrame {
 
     private void initializePanels(){
         login_panel = new LoginPanel(this);
-        mainApp_panel = new MainAppPanel(this);
+        mainApp_panel = new MainAppPanel_REAL(this);
         algo_panel = new AlgoPanel(this);
+        sw_mainApp_panel = new SummonersWarAppPanel(this);
+//        summonersWarPanel_panel = new SummonersWarPanel_modded(this);
 
 //        mainApp_panel.loadAssetsIntoPanels();
 
@@ -167,7 +181,6 @@ public class MainFrame extends JFrame {
         this.setIconImage(logo.getImage());
 //        Image img = new ImageIcon(getClass().getClassLoader().getResource(localAssetList.get(3))).getImage();
 //        this.setIconImage(img);
-        this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -181,8 +194,10 @@ public class MainFrame extends JFrame {
 //        setPanelTo(bg.getMain());
 
 
-        setPanelTo(algo_panel);
+//        setPanelTo(algo_panel);
+        setPanelTo(sw_mainApp_panel);
 
+        this.setVisible(true);
     }
 
     private void setOS(){

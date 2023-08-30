@@ -21,7 +21,7 @@ public class LongestSubstringPanel extends MySubPanel {
 //        string1.setText("");
         string2.setText("example");
 
-        System.out.println(lcs(string1.getText(), string2.getText()));
+//        System.out.println(lcs(string1.getText(), string2.getText()));
 
 
     }

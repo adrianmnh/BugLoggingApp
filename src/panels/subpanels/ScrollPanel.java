@@ -194,7 +194,7 @@ public class ScrollPanel extends JScrollPane {
                 // Handle mouse click
                 int pos = e2.getY() / ICON_HEIGHT ;
                 int assetPosInList = pos % f.localAssetList.size();
-                String message = "Clicked on " + assetPosInList + " -- " + f.localAssetList.get(assetPosInList) + "\n " + e2.getX() + " " + e2.getY();
+                String message = "Clicked on " + assetPosInList + "\n -- " + f.localAssetList.get(assetPosInList) + "\n " + e2.getX() + " " + e2.getY();
 //                System.out.println(e2.getX() + " " + e2.getY() + "\n");
                 System.out.println(assetPosInList);
                 System.out.println("Clicked on -- " + f.localAssetList.get(assetPosInList));
